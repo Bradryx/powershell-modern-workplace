@@ -1,0 +1,68 @@
+<#
+.SYNOPSIS
+    Exports DLP policy matches from Microsoft Purview.
+
+.DESCRIPTION
+    Connects to the Security & Compliance Center and retrieves DLP
+    policy matches from the Unified Audit Log for a specified date range.
+    Exports the results to a CSV file for reporting purposes.
+
+.PARAMETER StartDate
+    Start date for the audit log query. Defaults to 7 days ago.
+
+.PARAMETER EndDate
+    End date for the audit log query. Defaults to today.
+
+.PARAMETER OutputPath
+    Path to export the CSV file. Defaults to current directory.
+
+.EXAMPLE
+    .\Get-DLPPolicyMatches.ps1
+    .\Get-DLPPolicyMatches.ps1 -StartDate "2024-01-01" -EndDate "2024-01-31"
+    .\Get-DLPPolicyMatches.ps1 -OutputPath "C:\Reports"
+
+.NOTES
+    Author      : Brandon
+    GitHub      : https://github.com/Bradryx
+    Requires    : ExchangeOnlineManagement module
+#>
+
+param (
+    [datetime] $StartDate  = (Get-Date).AddDays(-7),
+    [datetime] $EndDate    = (Get-Date),
+    [string]   $OutputPath = (Get-Location).Path
+)
+
+# Connect to Security & Compliance Center
+Connect-IPPSSession
+
+# Retrieve DLP policy matches from Unified Audit Log
+Write-Host "Retrieving DLP policy matches from $StartDate to $EndDate..." -ForegroundColor Cyan
+
+$Results = Search-UnifiedAuditLog -StartDate $StartDate -EndDate $EndDate -RecordType ComplianceDLPSharePoint, ComplianceDLPExchange -ResultSize 5000
+
+if (-not $Results) {
+    Write-Host "No DLP policy matches found for the specified date range." -ForegroundColor Yellow
+    exit
+}
+
+# Parse and export results
+$ParsedResults = $Results | ForEach-Object {
+    $AuditData = $_.AuditData | ConvertFrom-Json
+    [PSCustomObject]@{
+        Timestamp      = $_.CreationDate
+        User           = $AuditData.UserId
+        PolicyName     = $AuditData.PolicyName
+        RuleName       = $AuditData.RuleName
+        Platform       = $_.RecordType
+        SensitiveTypes = ($AuditData.SensitiveInfoDetectionIsIncluded) -join ", "
+        Action         = $AuditData.Action
+    }
+}
+
+# Export to CSV
+$FileName   = "DLPPolicyMatches_$(Get-Date -Format 'yyyy-MM-dd').csv"
+$ExportPath = Join-Path -Path $OutputPath -ChildPath $FileName
+
+$ParsedResults | Export-Csv -Path $ExportPath -NoTypeInformation -Encoding UTF8
+Write-Host "Export completed: $ExportPath" -ForegroundColor Green
