@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PowerShell Modern Workplace</title>
-  <meta name="description" content="A collection of PowerShell scripts for managing and automating Microsoft 365 Modern Workplace environments — Intune, Entra ID, Exchange, and Purview." />
+  <meta name="description" content="A collection of PowerShell scripts for managing and automating Microsoft 365 Modern Workplace environments." />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -21,6 +21,7 @@
       <div class="nav-links">
         <a href="#scripts">Scripts</a>
         <a href="#requirements">Requirements</a>
+        <a href="#changelog">Changelog</a>
         <a href="https://github.com/Bradryx/powershell-modern-workplace" target="_blank" rel="noopener" class="btn-github">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
           GitHub
@@ -45,7 +46,7 @@
       </div>
       <div class="stats">
         <div class="stat">
-          <span class="stat-number" id="total-count">24</span>
+          <span class="stat-number">24</span>
           <span class="stat-label">Scripts</span>
         </div>
         <div class="stat-divider"></div>
@@ -67,10 +68,8 @@
     <div class="container">
       <div class="section-header">
         <h2>Script Library</h2>
-        <p>Browse by module or search for a specific script.</p>
+        <p>Browse by module or search for a specific script. Click a card for full details.</p>
       </div>
-
-      <!-- SEARCH + FILTER -->
       <div class="controls">
         <div class="search-wrap">
           <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -78,347 +77,15 @@
           <button class="search-clear" id="search-clear" aria-label="Clear search">✕</button>
         </div>
         <div class="filter-tabs" id="filter-tabs">
-          <button class="tab active" data-filter="all">All <span class="tab-count">24</span></button>
+          <button class="tab active" data-filter="all">All <span class="tab-count" id="count-all">24</span></button>
           <button class="tab" data-filter="intune">Intune <span class="tab-count">5</span></button>
           <button class="tab" data-filter="entra-id">Entra ID <span class="tab-count">7</span></button>
           <button class="tab" data-filter="exchange">Exchange <span class="tab-count">6</span></button>
           <button class="tab" data-filter="purview">Purview <span class="tab-count">6</span></button>
         </div>
       </div>
-
-      <!-- NO RESULTS -->
-      <div class="no-results hidden" id="no-results">
-        <p>No scripts match your search.</p>
-      </div>
-
-      <!-- INTUNE -->
-      <div class="module-group" data-module="intune">
-        <div class="module-header">
-          <div class="module-icon" style="--c: #0078d4;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
-          <h3>Intune</h3>
-          <span class="module-tag">Device Management</span>
-        </div>
-        <div class="cards">
-          <div class="card" data-module="intune" data-tags="get devices managed">
-            <div class="card-header">
-              <span class="card-type get">GET</span>
-              <code class="card-name">Get-IntuneDevices.ps1</code>
-            </div>
-            <p>Retrieves all managed devices from Intune with device name, OS, and compliance state.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">Read-Only</span>
-            </div>
-          </div>
-          <div class="card" data-module="intune" data-tags="get compliance report csv export">
-            <div class="card-header">
-              <span class="card-type get">GET</span>
-              <code class="card-name">Get-DeviceComplianceReport.ps1</code>
-            </div>
-            <p>Exports a detailed device compliance report to CSV — platform, OS version, compliance state, last check-in, primary user.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">CSV Export</span>
-            </div>
-          </div>
-          <div class="card" data-module="intune" data-tags="get stale devices inactive cleanup">
-            <div class="card-header">
-              <span class="card-type get">GET</span>
-              <code class="card-name">Get-StaleDevices.ps1</code>
-            </div>
-            <p>Identifies devices inactive for a configurable number of days and exports them to CSV for cleanup review.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">CSV Export</span>
-            </div>
-          </div>
-          <div class="card" data-module="intune" data-tags="set compliance policies windows macos ios android baseline">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-CompliancePolicies.ps1</code>
-            </div>
-            <p>Creates baseline compliance policies for Windows, macOS, iOS/iPadOS, and Android with password, encryption, firewall, and Defender requirements.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">Baseline</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-          <div class="card" data-module="intune" data-tags="set configuration profiles security windows macos baseline">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-ConfigurationProfiles.ps1</code>
-            </div>
-            <p>Deploys baseline security configuration profiles for Windows and macOS devices via Intune.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">Baseline</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ENTRA ID -->
-      <div class="module-group" data-module="entra-id">
-        <div class="module-header">
-          <div class="module-icon" style="--c: #7b68ee;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <h3>Entra ID</h3>
-          <span class="module-tag">Identity &amp; Access</span>
-        </div>
-        <div class="cards">
-          <div class="card" data-module="entra-id" data-tags="get mfa status report csv export authentication">
-            <div class="card-header">
-              <span class="card-type get">GET</span>
-              <code class="card-name">Get-MFAStatusReport.ps1</code>
-            </div>
-            <p>Exports MFA registration status per user to CSV — includes MFA capability, passwordless capability, default method, and SSPR status.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">CSV Export</span>
-            </div>
-          </div>
-          <div class="card" data-module="entra-id" data-tags="get stale guest accounts inactive external">
-            <div class="card-header">
-              <span class="card-type get">GET</span>
-              <code class="card-name">Get-StaleGuestAccounts.ps1</code>
-            </div>
-            <p>Identifies external guest accounts that have been inactive for a configurable number of days and exports them to CSV.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">CSV Export</span>
-            </div>
-          </div>
-          <div class="card" data-module="entra-id" data-tags="new bulk users create csv import cloud-only">
-            <div class="card-header">
-              <span class="card-type new">NEW</span>
-              <code class="card-name">New-BulkEntraUsers.ps1</code>
-            </div>
-            <p>Creates cloud-only Entra ID users in bulk from a CSV file. Generates secure passwords, handles UPN construction and MailNickname normalization, and exports results with object IDs.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">CSV Import</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-          <div class="card" data-module="entra-id" data-tags="new temporary access pass tap passwordless authentication">
-            <div class="card-header">
-              <span class="card-type new">NEW</span>
-              <code class="card-name">New-TemporaryAccessPass.ps1</code>
-            </div>
-            <p>Creates Temporary Access Passes (TAP) for Entra ID users — a time-limited passcode alternative to password resets for onboarding and recovery.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-          <div class="card" data-module="entra-id" data-tags="set authentication methods mfa passwordless tenant">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-AuthenticationMethods.ps1</code>
-            </div>
-            <p>Enables all recommended authentication methods tenant-wide including FIDO2, Microsoft Authenticator, and temporary access passes.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">Baseline</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-          <div class="card" data-module="entra-id" data-tags="set conditional access policies mfa device compliance location">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-ConditionalAccessPolicies.ps1</code>
-            </div>
-            <p>Creates 3 baseline Conditional Access policies: require MFA for all users, require device compliance, and restrict admin access by named location.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">Baseline</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-          <div class="card" data-module="entra-id" data-tags="set group membership bulk add remove csv">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-GroupMembership.ps1</code>
-            </div>
-            <p>Bulk adds or removes users from Entra ID groups using a CSV file as input. Supports both add and remove operations.</p>
-            <div class="card-footer">
-              <span class="tag">Microsoft.Graph</span>
-              <span class="tag">CSV Import</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- EXCHANGE -->
-      <div class="module-group" data-module="exchange">
-        <div class="module-header">
-          <div class="module-icon" style="--c: #107c41;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <h3>Exchange Online</h3>
-          <span class="module-tag">Mailbox Management</span>
-        </div>
-        <div class="cards">
-          <div class="card" data-module="exchange" data-tags="get inactive mailboxes csv export">
-            <div class="card-header">
-              <span class="card-type get">GET</span>
-              <code class="card-name">Get-InactiveMailboxes.ps1</code>
-            </div>
-            <p>Exports mailboxes that have been inactive for a configurable number of days to CSV for archival or offboarding decisions.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">CSV Export</span>
-            </div>
-          </div>
-          <div class="card" data-module="exchange" data-tags="get mailbox size report quota csv export">
-            <div class="card-header">
-              <span class="card-type get">GET</span>
-              <code class="card-name">Get-MailboxSizeReport.ps1</code>
-            </div>
-            <p>Exports mailbox size, quota status, and quota usage percentage to CSV for capacity planning and governance reporting.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">CSV Export</span>
-            </div>
-          </div>
-          <div class="card" data-module="exchange" data-tags="set anti-spam antiphishing policies baseline security">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-AntiSpamPolicies.ps1</code>
-            </div>
-            <p>Creates baseline anti-spam and anti-phishing policies with spam/phishing quarantine, bulk threshold, mailbox intelligence, spoof intelligence, and safety tips.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">Baseline</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-          <div class="card" data-module="exchange" data-tags="set mailbox audit log enable auditing">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-MailboxAuditLog.ps1</code>
-            </div>
-            <p>Enables mailbox auditing for all user mailboxes in the tenant to support security investigations and compliance requirements.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-          <div class="card" data-module="exchange" data-tags="set mailbox permissions full access send as csv bulk">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-MailboxPermissions.ps1</code>
-            </div>
-            <p>Bulk assigns FullAccess and SendAs permissions to user mailboxes using a CSV file, streamlining delegation at scale.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">CSV Import</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-          <div class="card" data-module="exchange" data-tags="set shared mailbox delegation full access send as">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-SharedMailboxDelegation.ps1</code>
-            </div>
-            <p>Configures FullAccess and SendAs delegation for shared mailboxes, enabling team access to shared inboxes with proper permissions.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PURVIEW -->
-      <div class="module-group" data-module="purview">
-        <div class="module-header">
-          <div class="module-icon" style="--c: #c43e1c;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3>Purview</h3>
-          <span class="module-tag">Compliance &amp; Data Protection</span>
-        </div>
-        <div class="cards">
-          <div class="card" data-module="purview" data-tags="enable audit log unified tenant">
-            <div class="card-header">
-              <span class="card-type enable">ENABLE</span>
-              <code class="card-name">Enable-AuditLog.ps1</code>
-            </div>
-            <p>Enables the Unified Audit Log for the tenant — a prerequisite for compliance monitoring, eDiscovery, and security investigations.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-          <div class="card" data-module="purview" data-tags="get dlp policy matches report csv export unified audit log">
-            <div class="card-header">
-              <span class="card-type get">GET</span>
-              <code class="card-name">Get-DLPPolicyMatches.ps1</code>
-            </div>
-            <p>Exports DLP policy match events from the Unified Audit Log to CSV for compliance monitoring and incident investigation.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">CSV Export</span>
-            </div>
-          </div>
-          <div class="card" data-module="purview" data-tags="get sensitivity label report activity csv export governance">
-            <div class="card-header">
-              <span class="card-type get">GET</span>
-              <code class="card-name">Get-SensitivityLabelReport.ps1</code>
-            </div>
-            <p>Exports sensitivity label usage and activity to CSV for data governance insights and information protection reporting.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">CSV Export</span>
-            </div>
-          </div>
-          <div class="card" data-module="purview" data-tags="set dlp policies data loss prevention gdpr credit card iban baseline">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-DLPPolicies.ps1</code>
-            </div>
-            <p>Creates 4 baseline DLP policies across Exchange, SharePoint, OneDrive, and MIP — detecting credit cards, EU ID numbers, and IBAN with incident reporting.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">Baseline</span>
-              <span class="tag">GDPR</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-          <div class="card" data-module="purview" data-tags="set retention policies baseline exchange sharepoint onedrive">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-RetentionPolicies.ps1</code>
-            </div>
-            <p>Creates baseline retention policies across Exchange, SharePoint, and OneDrive to meet legal hold and compliance retention requirements.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">Baseline</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-          <div class="card" data-module="purview" data-tags="set sensitivity labels classification information protection">
-            <div class="card-header">
-              <span class="card-type set">SET</span>
-              <code class="card-name">Set-SensitivityLabels.ps1</code>
-            </div>
-            <p>Creates a standard set of sensitivity labels for content classification — enabling information protection across Microsoft 365 workloads.</p>
-            <div class="card-footer">
-              <span class="tag">ExchangeOnlineManagement</span>
-              <span class="tag">Baseline</span>
-              <span class="tag">Write</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <div class="no-results hidden" id="no-results"><p>No scripts match your search.</p></div>
+      <div id="script-list"></div>
     </div>
   </section>
 
@@ -436,14 +103,28 @@
             <div class="req-card-icon">📦</div>
             <div>
               <div class="req-card-title">Microsoft.Graph</div>
-              <div class="req-card-desc">Required for Intune, Entra ID, and some SharePoint scripts. Install via <code>Install-Module Microsoft.Graph</code>.</div>
+              <div class="req-card-desc">Required for Intune and Entra ID scripts.
+                <div class="copy-line">
+                  <code id="cmd-graph">Install-Module Microsoft.Graph</code>
+                  <button class="copy-btn" data-copy="Install-Module Microsoft.Graph" aria-label="Copy">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="req-card">
             <div class="req-card-icon">📦</div>
             <div>
               <div class="req-card-title">ExchangeOnlineManagement</div>
-              <div class="req-card-desc">Required for Exchange and Purview scripts. Install via <code>Install-Module ExchangeOnlineManagement</code>.</div>
+              <div class="req-card-desc">Required for Exchange and Purview scripts.
+                <div class="copy-line">
+                  <code id="cmd-exo">Install-Module ExchangeOnlineManagement</code>
+                  <button class="copy-btn" data-copy="Install-Module ExchangeOnlineManagement" aria-label="Copy">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="req-card">
@@ -457,11 +138,30 @@
             <div class="req-card-icon">💡</div>
             <div>
               <div class="req-card-title">Usage</div>
-              <div class="req-card-desc">Run <code>Get-Help .\ScriptName.ps1 -Full</code> on any script for synopsis, parameters, and examples.</div>
+              <div class="req-card-desc">Run
+                <div class="copy-line">
+                  <code>Get-Help .\ScriptName.ps1 -Full</code>
+                  <button class="copy-btn" data-copy="Get-Help .\ScriptName.ps1 -Full" aria-label="Copy">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  </button>
+                </div>
+                on any script for synopsis, parameters, and examples.
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- CHANGELOG -->
+  <section id="changelog" class="changelog-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Changelog</h2>
+        <p>Recent commits to the repository.</p>
+      </div>
+      <div class="timeline" id="changelog-list"></div>
     </div>
   </section>
 
@@ -475,6 +175,9 @@
       </div>
     </div>
   </footer>
+
+  <!-- COPY TOAST -->
+  <div class="toast" id="toast">Copied!</div>
 
   <script src="script.js"></script>
 </body>
