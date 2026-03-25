@@ -1,4 +1,43 @@
 /* ===========================
+   THEME
+=========================== */
+(function () {
+  const stored = localStorage.getItem("theme");
+  if (stored === "light" || stored === "dark") {
+    document.documentElement.setAttribute("data-theme", stored);
+  }
+})();
+
+function initTheme() {
+  const btn = document.getElementById("theme-toggle");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    let next;
+    if (!current) {
+      next = systemDark ? "light" : "dark";
+    } else if (current === "dark") {
+      next = "light";
+    } else {
+      next = "dark";
+    }
+
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  });
+
+  // Keep in sync if system preference changes and no manual override
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    if (!localStorage.getItem("theme")) {
+      document.documentElement.removeAttribute("data-theme");
+    }
+  });
+}
+
+/* ===========================
    DATA
 =========================== */
 const GITHUB_BASE = "https://github.com/Bradryx/powershell-modern-workplace/blob/main/";
@@ -566,3 +605,4 @@ function initControls() {
 renderScripts();
 renderChangelog();
 initControls();
+initTheme();
